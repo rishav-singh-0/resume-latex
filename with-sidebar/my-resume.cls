@@ -12,7 +12,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{my-resume}[2020/11/17 my-resume v0.2, my own resume/CV class.]
+\ProvidesClass{my-resume}[2022/06/21 my-resume v0.1, my own resume/CV class.]
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -123,6 +123,8 @@
 \definecolor{awesome-nephritis}{HTML}{27AE60}
 \definecolor{awesome-concrete}{HTML}{95A5A6}
 \definecolor{awesome-darknight}{HTML}{131A28}
+\definecolor{awesome-darkgray}{HTML}{576d7b}
+\definecolor{awesome-lightgray}{HTML}{e5e9ec}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -301,6 +303,7 @@
 \newcommand{\homepage}[2]{\infofield{\faHome}{\href{#2}{#1}}}
 \newcommand{\linkedin}[2]{\infofield{\faLinkedin}{\href{#2}{#1}}}
 \newcommand{\github}[2]{\infofield{\faGithub}{\href{#2}{#1}}}
+\newcommand{\website}[2]{\infofield{\faUser}{\href{#2}{#1}}}
 \newcommand{\orcid}[2]{\infofield{\aiOrcid}{\href{#2}{#1}}}
 \newcommand{\ads}[2]{\infofield{\aiADS}{\href{#2}{#1}}}
 
@@ -404,6 +407,45 @@
     \vspace{0.5em}
 }
 
+% format project list
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% set length of date/place column versus position column in fraction of linewidth before linewidth gets redefined in minipages
+\newlength{\projectdateplacelength}
+\newlength{\projectpositionlength}
+\setlength{\projectdateplacelength}{0.4\linewidth}
+\setlength{\projectpositionlength}{0.4\linewidth}
+\def \ifempty#1{\def\temp{#1} \ifx\temp\empty }
+\newcommand{\project}[4]{%
+    \begin{minipage}[t]{\projectdateplacelength}% minipage for left column with date/place
+        \footnotesize
+        \begin{minipage}[t]{3mm}% wrap marker in minipage to allow multi-line dates
+            \makebox[3mm][c]{\faCalendar}
+        \end{minipage}%
+        \hspace{0.5em}%
+        \begin{minipage}[t]{\dimexpr \projectdateplacelength-3mm-0.5em}% wrap date in minipage to allow multi-line dates
+            #1
+        \end{minipage}%
+        \ifempty{#2}
+        \else
+            \par
+            \vspace{0.1em}
+            \begin{minipage}[t]{3mm}% wrap marker in minipage to allow multi-line places
+                \makebox[3mm][c]{\faMapMarker}
+            \end{minipage}%
+            \hspace{0.5em}%
+            \begin{minipage}[t]{\dimexpr \jobdateplacelength-3mm-0.5em}% wrap place in minipage to allow multi-line places
+                #2
+            \end{minipage}%
+        \fi
+    \end{minipage}%
+    \begin{minipage}[t]{\projectpositionlength}% minipage for position
+        {\large \color{emphasis} #3}
+    \end{minipage}%
+    \ifstrequal{#4}{}{}{\par \vspace{0.1em} \footnotesize #4}
+    \par\normalsize
+    \vspace{0.5em}
+}
 
 % skill with 5 dot bar chart
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
