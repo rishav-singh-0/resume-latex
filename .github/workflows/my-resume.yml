@@ -9,6 +9,7 @@ on:
       - master
     paths:
       - "./my-resume/*"
+  workflow_dispatch: 
 
 jobs:
   build:
