@@ -1,0 +1,34 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  push:
+    branches: [ "master" ]
+    paths:
+      - "./my-resume/*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+    
+      - name: Latex Build
+        uses: xu-cheng/latex-action@v2
+        with:
+          working_directory: my-resume
+          root_file: resume.tex
+          extra_system_packages: "inkscape"
+          latexmk_use_xelatex: true
+#           extra_fonts: |
+#             ./path/to/custom.ttf
+#             ./fonts/*.otf
+          
+          
+      - name: Upload PDF
+        uses: actions/upload-artifact@v2
+        with:
+          name: PDF
+          path: main.pdf
