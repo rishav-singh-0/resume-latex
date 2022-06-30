@@ -380,6 +380,9 @@
 \setlength{\jobdateplacelength}{0.4\linewidth}
 \setlength{\jobpositionlength}{0.6\linewidth}
 \newcommand{\job}[4]{%
+    \begin{minipage}[t]{\jobpositionlength}% minipage for position
+        {\large \color{emphasis} #1}
+    \end{minipage}%
     \begin{minipage}[t]{\jobdateplacelength}% minipage for left column with date/place
         \footnotesize
         \begin{minipage}[t]{3mm}% wrap marker in minipage to allow multi-line dates
@@ -387,7 +390,7 @@
         \end{minipage}%
         \hspace{0.5em}%
         \begin{minipage}[t]{\dimexpr \jobdateplacelength-3mm-0.5em}% wrap date in minipage to allow multi-line dates
-            #1
+            #2
         \end{minipage}%
         \par
         \vspace{0.1em}
@@ -396,11 +399,8 @@
         \end{minipage}%
         \hspace{0.5em}%
         \begin{minipage}[t]{\dimexpr \jobdateplacelength-3mm-0.5em}% wrap place in minipage to allow multi-line places
-            #2
+            #3
         \end{minipage}%
-    \end{minipage}%
-    \begin{minipage}[t]{\jobpositionlength}% minipage for position
-        {\large \color{emphasis} #3}
     \end{minipage}%
     \ifstrequal{#4}{}{}{\par \vspace{0.1em} \footnotesize #4}
     \par\normalsize
@@ -411,20 +411,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % set length of date/place column versus position column in fraction of linewidth before linewidth gets redefined in minipages
-\newlength{\projectdateplacelength}
-\newlength{\projectpositionlength}
-\setlength{\projectdateplacelength}{0.4\linewidth}
-\setlength{\projectpositionlength}{0.4\linewidth}
-\def \ifempty#1{\def\temp{#1} \ifx\temp\empty }
 \newcommand{\project}[5]{%
-    \begin{minipage}[t]{\projectdateplacelength}% minipage for left column with date/place
+    \begin{minipage}[t]{\jobpositionlength}% minipage for position
+        {\large  \color{emphasis} #1}
+    \end{minipage}%
+    \begin{minipage}[t]{\jobdateplacelength}% minipage for left column with date/place
         \footnotesize
         \begin{minipage}[t]{3mm}% wrap marker in minipage to allow multi-line dates
             \makebox[3mm][c]{\faCalendar}
         \end{minipage}%
         \hspace{0.5em}%
-        \begin{minipage}[t]{\dimexpr \projectdateplacelength-3mm-0.5em}% wrap date in minipage to allow multi-line dates
-            #1
+        \begin{minipage}[t]{\dimexpr \jobdateplacelength-3mm-0.5em}% wrap date in minipage to allow multi-line dates
+            #2
         \end{minipage}%
         \par
         \vspace{0.1em}
@@ -435,21 +433,17 @@
         \begin{minipage}[t]{\dimexpr \jobdateplacelength-3mm-0.5em}% wrap place in minipage to allow multi-line places
             \href{#3}{link}
         \end{minipage}%
+    \end{minipage}%
+    \ifstrequal{#4}{}{}{
         \par
         \vspace{0.1em}
+        \footnotesize
         \begin{minipage}[t]{3mm}% wrap marker in minipage to allow multi-line places
             \makebox[3mm][c]{\faGears}
         \end{minipage}%
         \hspace{0.5em}%
-        \begin{minipage}[t]{\dimexpr \jobdateplacelength-3mm-0.5em}% wrap place in minipage to allow multi-line places
-            Technology: #4
-        \end{minipage}%
-    \end{minipage}%
-
-    \begin{minipage}[t]{\projectpositionlength}% minipage for position
-        {\large \color{emphasis} #2}
-    \end{minipage}%
-
+        Technology: #4
+    }
     \ifstrequal{#5}{}{}{\par \vspace{0.1em} \footnotesize #5}
     \par\normalsize
     \vspace{0.5em}
@@ -627,8 +621,8 @@
     \begin{minipage}[t]{\dimexpr \textwidth-0.5em-3mm}%
         {\normalsize #1\par}
     \end{minipage}%
-    \par
-    \vspace{0.5em}
+    % \par
+    % \vspace{0.5em}
 }
 
 % lists
