@@ -1,206 +1,652 @@
-\documentclass[%singlesided,
-               doublesided,
-               paper=a4,
-               fontsize=10pt
-              ]{my-resume}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% my-resume.cls
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% A class to do stuff.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% set geometry
+% CLASS OPTIONS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{my-resume}[2022/06/21 my-resume v0.1, my own resume/CV class.]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CLASS OPTIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% option to have a single sided document, i.e. the highlight bar is always left
+% or have a two sided document where the highlight bar is alternating, i.e. always on the same edge of the paper
+\RequirePackage{ifthen}
+\newboolean{@singleordouble}
+\setboolean{@singleordouble}{true}
+\DeclareOption{singlesided}{\setboolean{@singleordouble}{true}}
+\DeclareOption{doublesided}{\setboolean{@singleordouble}{false}}
+
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrartcl}}
+\ProcessOptions*
+
+\ifthenelse{\boolean{@singleordouble}}
+    {\PassOptionsToClass{oneside}{scrartcl}}
+    {\PassOptionsToClass{twoside}{scrartcl}}
+
+\LoadClass{scrartcl}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% REQUIRED PACKAGES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{tikz}
+\usetikzlibrary{arrows}
+\RequirePackage[skins]{tcolorbox}       % somehow required for tikz to work at all
+\RequirePackage{graphicx}
+\RequirePackage{xcolor}
+\RequirePackage{fontawesome}
+\RequirePackage{academicons}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FILTER IRRELEVANT WARNINGS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage{silence}
+
+% The page header is deliberately disabled in my-resume, so the warning by scrlayer-scrpage is invalid. 
+\WarningFilter{scrlayer-scrpage}{Very small head height detected!}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DEFINE GEOMETRY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newlength\highlightwidth
+\newlength\headerheight
+\newlength\marginleft
+\newlength\marginright
+\newlength\margintop
+\newlength\marginbottom
+
+% default sizes, margins, ...
 \setlength\highlightwidth{8cm}
-\setlength\headerheight{4cm}            % note that margintop gets added to this value, i.e. the header bar is 5cm
+\setlength\headerheight{6cm}
 \setlength\marginleft{1cm}
-\setlength\marginright{\marginleft}      % needs to be 1.5 times to be actually equal. why?
+\setlength\marginright{\marginleft}
 \setlength\margintop{1cm}
 \setlength\marginbottom{1cm}
 
+\RequirePackage[bindingoffset=0cm,nomarginpar,noheadfoot]{geometry}
+\geometry{left=\marginleft,right=\marginright,top=\margintop,bottom=\marginbottom}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% FONTS
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \setlength{\voffset}{\dimexpr -1in+\margintop}
+% \setlength{\topmargin}{0cm}
 
-\RequirePackage{fontspec}
-\setmainfont{Carlito}
+% minipage has an annoying af indent that must be removed
+\setlength{\parindent}{0pt}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % COLORS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\colorlet{highlightbarcolor}{awesome-lightgray}
-\colorlet{headerbarcolor}{awesome-darkgray}
+\RequirePackage{xcolor}
 
-\colorlet{headerfontcolor}{white}
-\colorlet{accent}{awesome-emerald}
-\colorlet{heading}{black}
-\colorlet{emphasis}{black}
-\colorlet{body}{black}
+% Gray-scale colors
+\definecolor{white}{HTML}{FFFFFF}
+\definecolor{black}{HTML}{000000}
+\definecolor{darkgray}{HTML}{333333}
+\definecolor{mediumgray}{HTML}{444444}
+\definecolor{gray}{HTML}{5D5D5D}
+% Basic colors
+\definecolor{green}{HTML}{C2E15F}
+\definecolor{orange}{HTML}{FDA333}
+\definecolor{purple}{HTML}{D3A4F9}
+\definecolor{red}{HTML}{FB4485}
+\definecolor{blue}{HTML}{6CE0F1}
+% Text colors
+\definecolor{darktext}{HTML}{414141}
+\colorlet{text}{darkgray}
+\colorlet{graytext}{gray}
+% Awesome colors
+\definecolor{awesome-emerald}{HTML}{00A388}
+\definecolor{awesome-skyblue}{HTML}{0395DE}
+\definecolor{awesome-red}{HTML}{DC3522}
+\definecolor{awesome-pink}{HTML}{EF4089}
+\definecolor{awesome-orange}{HTML}{FF6138}
+\definecolor{awesome-nephritis}{HTML}{27AE60}
+\definecolor{awesome-concrete}{HTML}{95A5A6}
+\definecolor{awesome-darknight}{HTML}{131A28}
+\definecolor{awesome-darkgray}{HTML}{576d7b}
+\definecolor{awesome-lightgray}{HTML}{e5e9ec}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% set document
+% COLORED BARS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\RequirePackage{xpatch}
+\RequirePackage{scrlayer-scrpage}
 
-\begin{document}
-
-\name{Rishav Singh}
-% \name{Singh Rishav}
-\tagline{VLSI Enthusiast eager to contribute to team success through hard work,\\ attention to detail and excellent organizational skills. Clear understanding \\of FPGA, Linux and related technologies. Motivated to learn and grow \\in the industry. }
-% \tagline{VLSI Enthusiast eager to contribute to team success through hard work,\\ attention to detail and excellent organizational skills. Clear understanding \\of FPGA, Linux and related technologies. Motivated to learn and grow \\in the industry. }
-\photo[round]{rishav.jpg}{\dimexpr \headerheight-\marginbottom}   % make photo exactly match the header with margintop/marginright/marginbottom as margin
-
-\makeheader
-
-\highlightbar{
-
-    \section{Contact}
-    
-    \email{rsh04613@gmail.com}
-    \phone{+91 7016993938}
-    % \location{Some Street 1, 12345 City Name}
-    \vspace{0.5em}
-    % \homepage{nicokrieger.com}{https://www.nicokrieger.de}
-    \github{@rishav-singh-0}{https://github.com/rishav-singh-0}
-    \linkedin{Rishav Singh}{https://www.linkedin.com/in/rishav-singh-0}
-    \website{website}{http://rishav-singh-0.github.io/}
-    
-    \section{Skills}
-    
-    \skillsection{Programming Languages}
-    \skill{Verilog}{5}
-    \skill{Python}{5}
-    \skill{C/C++}{4}
-    \skill{Bash}{4}
-    \skill{Assembly(8086)}{3}
-    \skill{Scilab}{4}
-    \skill{Javascript}{3}
-    % \skill{Dart}{3}
-    
-    \vspace{0.5em}
-    \skillsection{Technologies}
-    \skill{Digital Electronics}{5}
-    \skill{Microcontrollers}{5}
-    \skill{Computer Architecture}{4}
-    \skill{Embedded Electronics}{3}
-    % \skill{Web Development}{4}
-    % \skill{React}{4}
-    % \skill{React Native}{4}
-    % \skill{Django}{4}
-    % \skill{Flutter}{2}
-    % \skill{Firebase}{3}
-    \skill{ROS}{3}
-    
-    % \vspace{0.5em}
-    % \skillsection{Operating Systems}
-    % \skill{Linux}{4}
-    % \skill{RTOS}{4}
-    % \skill{MacOS}{5}
-    % \skill{Windows}{2}
-    
-    \vspace{0.5em}
-    \skillsection{Software \& Tools}
-    \skill{CAD Tools}{4}
-    (e.g. Quartus, Modelsim, ...)\\
-    \skill{Data handling/analysis}{4}
-    (e.g. numpy, scipy, pandas, ...)\\
-    % \skill{Scilab}{3}
-    % \skill{Ltspice}{3}
-    % \skill{8086 Microcontroller}{3}
-    \skill{Docker}{3}
-    \skill{Git}{5}
-    
-    % \vspace{0.5em}
-    % \skillsection{Another skill subsection header}
-    % You can also put simply text here without the dots.
-    
-    \bigskip
-    
-    \section{Courses}
-    \simpleskill{VLSI SoC Design using Verilog HDL - Maven Silicon}
-    \simpleskill{Embedded Systems and Robotics Mooc}
-    \simpleskill{Practical Linux for Network Engineers}
-
+% declare new page style using layers
+\DeclareNewPageStyleByLayers{headerhighlightmain}{%
+  highlightbar.even,%
+  highlightbar.odd,%
+  header.bg
 }
-\mainbar{
-    
-    \section[\faMortarBoard]{Education}
-    \job{July 2019 - June 2023}
-        {Dharmsinh Desai University \\Nadiad}
-        {B.Tech in  Electronics and \\Communication Engineering}
-        {CGPA - 8.65/10}
-    \job{June 2019}
-        {Shree P. V. Modi School, Jamnagar}
-        {PCM with Computer Science}
-        {PR - 80.9/100}
-
-    \section[\faGears]{Professional Experience}
-    \job{May 2021 - Jul 2021}
-        {Bombay}
-        {Intern at eYantra, IIT Bombay}
-        {Optimized auto evaluation tool for working on Linux based kernels \\Created and connected Django backend with Vue frontend and automated dynamic docker container generation on submission and result evaluation. }
-    \job{Sep 2021 - Current}
-        {Nadiad}
-        {Tech Lead at Abhiyanta}
-        {Managed team performance by training, mentoring, disciplining and motivating innovators.
-        \\Instructor for for explaining the concepts of Robotics, Robot Operating Systems, Linux, Git and Embedded Systems. Working on application based projects. }
-    \job{May 2021 - Current}
-        {Nadiad}
-        {Associate Developer at DDU Connect}
-        {Managed a team of developers for DDU Connect’s website and Android Application. }
-    
-    \section[\faRocket]{Projects}
-     \project{Oct 2020 - Feb 2021}
-        {\href{https://youtube.com/playlist?list=PL7qLGQQRzAKJqw33z4Y1btjFr9WMiOrjP}{Vitarana Drone}}
-        {https://youtube.com/playlist?list=PL7qLGQQRzAKJqw33z4Y1btjFr9WMiOrjP}
-        {Python, ROS, Drone, \\Gazebo, Git}
-        {Used Robot Operating System(ROS) for Autonomous Drone based delivery system in a simulated Gazebo environment. }
-     \project{Jan 2022 - Mar 2022}
-        {\href{https://rishav-singh-0.github.io/industrial-surveillance-robot/}{Industrial Surveillance Robot on FPGA}}
-        {https://rishav-singh-0.github.io/industrial-surveillance-robot/}
-        {Verilog, FPGA, Quartus}
-        {A FPGA based robot simulation for measuring the important industrial parameters using different sensors, armed with IoT gate way to analyze the chart of different parameters and information from anywhere and extended with alarm system for highlighting ambiguity. }
-     \project{Apr 2022 - Jun 2022}
-        {\href{https://youtu.be/pkwcfo8rbys}{IoT in Hydroponics}}
-        {https://youtu.be/pkwcfo8rbys}
-        {C++, Flutter, Firebase}
-        {A government granted project to modify hydroponics based farming system with IoT in order to improve quality of soil less farming.
-        \\Measurement and control of water quality and necessary parameters through a phone and web based application. }
-     \project{Jun 2021 - Jul 2021}
-        {\href{https://rishav-singh-0.github.io/custom_linux_kernel.html}{Linux Kernel Configuration}}
-        {https://rishav-singh-0.github.io/custom_linux_kernel.html}
-        {OS Components, \\Linux, Kernel}
-        {Configured Linux kernel for better power consumption, security and performance }
-    %  \project{July 2022 - Aug 2022}
-    %     {Jellyfin Media Server using resberry-pi3}
-    %     {}
-    %     {RespberryPi}
-    %     {}
-    %  \project{Jul 2020 - Oct 2020 }
-    %     {\href{}{Abhiyantacommunity.org Website using React}}
-    %     {}
-    %     {React, Git, Github, Firebase, CI/CD}
-    %     {Learnt to host the website on firebase \\Used github for automation and continuous deployment}
-    %  \project{Mar 2021 - Apr 2021}
-    %     {Personal Website using bash and markdown}
-    %     {}
-    %     {Bash, Markdown, \\Git, Github, CI/CD}
-    %     {Achieved the goal of a minimal static site generator using bash, which generates html files from markdown. Automated CI/CD with github actions and hosted on github-pages}
-    %  \project{Oct 2021 - Nov 2021}
-    %     {Crypto and Stocks tracking and analysing bot using Django}
-    %     {}
-    %     {}
-    %     {Realtime data fetching and applying technical indicators on selected symbols \\Backtesting of custom strategies and displaying result on charts}
-    
-    % \section[\faTrophy]{Achievements}
-    %  \project{date}{}{Prefinals Round in EYRC}{}
-    %  \project{date}{}{Grade B in Embedded Mooc}{}
-    %  \project{date}{eYantra, IIT Bombay}{Campus Ambassador}{}
-        
+\DeclareNewPageStyleByLayers{highlightmain}{%
+  highlightbar.even,%
+  highlightbar.odd
 }
-\makebody
-\clearpage
+\DeclareNewPageStyleByLayers{headermain}{%
+  header.bg
+}
 
-\end{document}
+% define the layer for the highlight bar on odd pages
+\DeclareNewLayer[
+  background,
+  oddpage,
+  innermargin,
+  width=\highlightwidth,
+  contents={\color{highlightbarcolor}\rule{\layerwidth}{\layerheight}}
+]{highlightbar.odd}
+
+% clone highlight bar form odd pages to even pages
+% on same side for digital format
+\newcommand*\highlightbarsingle{%
+\DeclareNewLayer[
+  background,
+  evenpage,
+  outermargin,
+  width=\highlightwidth,
+  contents={\color{highlightbarcolor}\rule{\layerwidth}{\layerheight}}
+]{highlightbar.even}
+}
+
+% clone highlight bar from odd pages to even pages
+% on opposite sides for prints
+\newcommand*\highlightbardouble{%
+\DeclareNewLayer[
+    clone=highlightbar.odd,
+    evenpage,
+    align=r,
+    hoffset=\paperwidth
+  ]{highlightbar.even}
+ }
+
+% use the correct version of the highlight bar on even pages
+% single for single, double for double
+\ifthenelse{
+    \boolean{@singleordouble}
+}{%
+    \DeclareNewLayer[
+      background,
+      evenpage,
+      outermargin,
+      width=\highlightwidth,
+      contents={\color{highlightbarcolor}\rule{\layerwidth}{\layerheight}}
+    ]{highlightbar.even}
+}{%
+    \DeclareNewLayer[
+        clone=highlightbar.odd,
+        evenpage,
+        align=r,
+        hoffset=\paperwidth
+      ]{highlightbar.even}
+}
+
+% define the layer for the header 
+\DeclareNewLayer[
+  background,
+  topmargin,
+  addheight=\headerheight,
+  contents={\color{headerbarcolor}\rule{\layerwidth}{\layerheight}}
+]{header.bg}
+
+% % add the layers to page style plain
+% \ForEachLayerOfPageStyle*{headerhighlightmain}{%
+%   \AddLayersToPageStyle{plain.scrheadings}{#1}%
+% }
+
+% remove anything that might be there (page number) from header and footer
+\lehead[]{}
+\cehead[]{}
+\rehead[]{}
+\lohead[]{}
+\cohead[]{}
+\rohead[]{}
+\lefoot[]{}
+\cefoot[]{}
+\refoot[]{}
+\lofoot[]{}
+\cofoot[]{}
+\rofoot[]{}
+
+% convenience functions to enable/disable header or highlightbar
+% TBD
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HEADER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% variables for name, tag line and photo setup
+\newcommand{\name}[1]{\def\@name{#1}}
+\newcommand{\tagline}[1]{\def\@tagline{#1}}
+\newcommand{\photo}[3][]{\def\@photo{#2}\def\@photodiameter{#3}\def\@photoformat{#1}}
+
+% try to align the top of the written out name with the top of the photo
+% it is impossible to get the actual height of a line to determine the offset between line top and charachter top
+% therefore use a bad workaround by setting the line height to 1.5 times the character height
+\newlength{\@namefontheight}
+\newlength{\@namelineheight}
+\settoheight{\@namefontheight}{\Huge\bfseries\MakeUppercase{A}}
+\setlength\@namelineheight{1.5\@namefontheight}
+
+% assemble the header
+\newcommand{\makeheader}{% header bar is a minipage
+    \begin{minipage}[t][\headerheight]{\textwidth}%
+        % \vspace{-1em}
+        \vspace{\dimexpr \@namefontheight-\@namelineheight}                     % align top of name and photo
+        % create two minipages for header text and photo if photo is given
+        \ifdef{\@photodiameter}{
+            \begin{minipage}[t]{\dimexpr \textwidth-\@photodiameter}        % to top align name and photo add [t] here
+                \vspace{0cm}%
+            }{}
+            % print the header text
+                \begin{minipage}[t][2em]{\linewidth}
+                    {\Huge\bfseries\color{headerfontcolor}\MakeUppercase{\@name}\par}
+                \end{minipage}%
+                \vfill%
+                \begin{minipage}[b][\dimexpr \headerheight-2em-\marginbottom]{\linewidth}%
+                    {\large\bfseries\color{headerfontcolor}\@tagline\par}
+                \end{minipage}%
+        % finish the minipages for text and photo if photo is given
+        \ifdef{\@photodiameter}{%
+            \end{minipage}\hfil%
+            \begin{minipage}[t]{\@photodiameter}                                % to top align name and photo add [t] here
+                \vspace{0cm}
+    			% format as square or round
+    			\ifthenelse{\equal{\@photoformat}{square}}{%
+    			    \includegraphics[width=\linewidth]{\@photo}%
+    			}{%
+    			    \tikz\path[fill overzoom image={\@photo}]circle[radius=0.5\linewidth];
+    			}
+    		\end{minipage}%
+            }{}
+	\end{minipage}%
+}
+
+\newcommand{\emptyheader}{%
+    \vspace*{\dimexpr \headerheight+0.5em}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BODY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% contact info
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\infofield}[2]{\mbox{\makebox[5mm]{\textcolor{accent}{\normalsize #1}}\hspace{0.5em}#2}\vspace{0.2em}\newline}
+\newcommand{\email}[1]{\infofield{\faEnvelope}{\href{mailto:#1}{#1}}}
+\newcommand{\address}[1]{\infofield{\faAt}{#1}}
+\newcommand{\location}[1]{\infofield{\faMapMarker}{#1}}
+\newcommand{\phone}[1]{\infofield{\faPhone}{#1}}
+\newcommand{\homepage}[2]{\infofield{\faHome}{\href{#2}{#1}}}
+\newcommand{\linkedin}[2]{\infofield{\faLinkedin}{\href{#2}{#1}}}
+\newcommand{\github}[2]{\infofield{\faGithub}{\href{#2}{#1}}}
+\newcommand{\website}[2]{\infofield{\faUser}{\href{#2}{#1}}}
+\newcommand{\orcid}[2]{\infofield{\aiOrcid}{\href{#2}{#1}}}
+\newcommand{\ads}[2]{\infofield{\aiADS}{\href{#2}{#1}}}
+
+
+% highlight bar
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\highlightbar}[1]{%
+    \def\@highlightbar{%
+        \begin{minipage}[t]{\dimexpr \highlightwidth-\marginleft-\marginright}%
+            #1%
+        \end{minipage}%
+    }
+}
+
+% main bar
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\mainbar}[1]{%
+    \def\@mainbar{%
+        \begin{minipage}[t]{\dimexpr \textwidth-\highlightwidth}%
+            #1%
+        \end{minipage}%
+    }
+}
+
+% make body with highlight bar and main bar
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\makebody}{%
+    \ifthenelse{\boolean{@singleordouble}}
+        {% if single layout, the highlight bar is always left
+            \@highlightbar
+            \hspace{\dimexpr \marginleft+\marginright}%
+            \@mainbar
+        }{% if double layout, the highlight bar alternates
+            \ifthispageodd{% if the page is odd, the highlight bar is on the left (as is for single layout)
+                \@highlightbar
+                \hspace{\dimexpr \marginleft+\marginright}%
+                \@mainbar
+            }{%  if the page is even, the highlight bar is on the right
+                \@mainbar
+                \hspace{\dimexpr \marginleft+\marginright}%
+                \@highlightbar
+            }   
+        }
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTIONS, SUBSECTIONS, AND MORE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% redefine section in caps, bold and with rule below
+\renewcommand{\section}[2][]{%
+    \bigskip%
+    % \ifstrequal{#1}{}{}{\marginpar{\vspace*{\dimexpr 1pt-\baselineskip}\raggedright\input{#1}}}%
+    \ifstrequal{#1}{}{}{\large \makebox[5mm][c]{#1}\hspace{0.5em}}
+    {\color{heading}\Large\bfseries\MakeUppercase{#2}}\\[-1ex]%
+    {\color{heading}\rule{\linewidth}{1.0pt}\par}\smallskip
+}
+
+% redefine subsection as bold
+\renewcommand{\subsection}[1]{%
+  \smallskip%
+  {\color{emphasis}\large\bfseries{#1}\par}\medskip
+}
+
+% format job/school list
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% set length of date/place column versus position column in fraction of linewidth before linewidth gets redefined in minipages
+\newlength{\jobdateplacelength}
+\newlength{\jobpositionlength}
+\setlength{\jobdateplacelength}{0.4\linewidth}
+\setlength{\jobpositionlength}{0.6\linewidth}
+\newcommand{\job}[4]{%
+    \begin{minipage}[t]{\jobpositionlength}% minipage for position
+        {\large \color{emphasis} #3}
+    \end{minipage}%
+    \begin{minipage}[t]{\jobdateplacelength}% minipage for left column with date/place
+        \footnotesize
+        \begin{minipage}[t]{3mm}% wrap marker in minipage to allow multi-line dates
+            \makebox[3mm][c]{\faCalendar}
+        \end{minipage}%
+        \hspace{0.5em}%
+        \begin{minipage}[t]{\dimexpr \jobdateplacelength-3mm-0.5em}% wrap date in minipage to allow multi-line dates
+            #1
+        \end{minipage}%
+        \par
+        \vspace{0.1em}
+        \begin{minipage}[t]{3mm}% wrap marker in minipage to allow multi-line places
+            \makebox[3mm][c]{\faMapMarker}
+        \end{minipage}%
+        \hspace{0.5em}%
+        \begin{minipage}[t]{\dimexpr \jobdateplacelength-3mm-0.5em}% wrap place in minipage to allow multi-line places
+            #2
+        \end{minipage}%
+    \end{minipage}%
+    \ifstrequal{#4}{}{}{\par \vspace{0.1em} \footnotesize #4}
+    \par\normalsize
+    \vspace{0.5em}
+}
+
+% format project list
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% set length of date/place column versus position column in fraction of linewidth before linewidth gets redefined in minipages
+\newlength{\projectdateplacelength}
+\newlength{\projectpositionlength}
+\setlength{\projectdateplacelength}{0.4\linewidth}
+\setlength{\projectpositionlength}{0.6\linewidth}
+\def \ifempty#1{\def\temp{#1} \ifx\temp\empty }
+\newcommand{\project}[5]{%
+    \begin{minipage}[t]{\projectpositionlength}% minipage for position
+        {\large  \color{emphasis} #1}
+    \end{minipage}%
+    \begin{minipage}[t]{\projectdateplacelength}% minipage for left column with date/place
+        \footnotesize
+        \begin{minipage}[t]{3mm}% wrap marker in minipage to allow multi-line dates
+            \makebox[3mm][c]{\faCalendar}
+        \end{minipage}%
+        \hspace{0.5em}%
+        \begin{minipage}[t]{\dimexpr \projectdateplacelength-3mm-0.5em}% wrap date in minipage to allow multi-line dates
+            #2
+        \end{minipage}%
+        \par
+        \vspace{0.1em}
+        \begin{minipage}[t]{3mm}% wrap marker in minipage to allow multi-line places
+            \makebox[3mm][c]{\faLink}
+        \end{minipage}%
+        \hspace{0.5em}%
+        \begin{minipage}[t]{\dimexpr \jobdateplacelength-3mm-0.5em}% wrap place in minipage to allow multi-line places
+            \href{#3}{link}
+        \end{minipage}%
+    \end{minipage}%
+    \ifstrequal{#4}{}{}{
+        \par
+        \vspace{0.1em}
+        \footnotesize
+        \begin{minipage}[t]{3mm}% wrap marker in minipage to allow multi-line places
+            \makebox[3mm][c]{\faGears}
+        \end{minipage}%
+        \hspace{0.5em}%
+        \begin{minipage}[t]{\dimexpr \jobdateplacelength-3mm-0.5em}% wrap place in minipage to allow multi-line places
+            Technology: #4
+        \end{minipage}%
+    }
+    \ifstrequal{#5}{}{}{\par \vspace{0.1em} \footnotesize #5}
+    \par\normalsize
+    \vspace{0.5em}
+}
+
+% skill with 5 dot bar chart
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\skill}[2]{%
+    \textcolor{emphasis}{\textbf{#1}}\hfill
+    \foreach \x in {1,...,5}{%
+      \space{\ifnumgreater{\x}{#2}{\color{gray}}{\color{accent}}\faCircle}}\par%
+}
+
+% skill without any charts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\simpleskill}[1]{%
+    \textcolor{emphasis}{\textbf{#1}}\par%
+}
+
+% sectioning of skills
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\skillsection}[1]{%
+    \textit{\color{accent}#1}\par
+}
+
+% tag (framed word or phrase)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% adapted from AltaCV: https://github.com/liantze/AltaCV
+\newcommand{\tag}[1]{%
+  \tikz[baseline]\node[anchor=base,draw=body!30,rounded corners,inner xsep=1ex,inner ysep =0.75ex,text height=1.5ex,text depth=.25ex]{#1};
+}
+
+% wheel chart
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% adapted from AltaCV: https://github.com/liantze/AltaCV
+\newcommand{\wheelchart}[4][0]{%
+    \begingroup\centering
+    \def\innerradius{#3}%
+    \def\outerradius{#2}%
+    % Calculate total
+    \pgfmathsetmacro{\totalnum}{0}%
+    \foreach \value/\colour/\name in {#4} {%
+        \pgfmathparse{\value+\totalnum}%
+        \global\let\totalnum=\pgfmathresult%
+    }%
+    \begin{tikzpicture}
+
+      % Calculate the thickness and the middle line of the wheel
+      \pgfmathsetmacro{\wheelwidth}{\outerradius-\innerradius}
+      \pgfmathsetmacro{\midradius}{(\outerradius+\innerradius)/2}
+      \pgfmathsetmacro{\totalrot}{-90 + #1}
+
+      % Rotate so we start from the top
+      \begin{scope}[rotate=\totalrot]
+
+      % Loop through each value set. \cumnum keeps track of where we are in the wheel
+      \pgfmathsetmacro{\cumnum}{0}
+      \foreach \value/\width/\colour/\name in {#4} {
+            \pgfmathsetmacro{\newcumnum}{\cumnum + \value/\totalnum*360}
+
+            % Calculate the percent value
+            \pgfmathsetmacro{\percentage}{\value/\totalnum*100}
+            % Calculate the mid angle of the colour segments to place the labels
+            \pgfmathsetmacro{\midangle}{-(\cumnum+\newcumnum)/2}
+
+            % This is necessary for the labels to align nicely
+            \pgfmathparse{
+               (-\midangle>180?"west":"east")
+            } \edef\textanchor{\pgfmathresult}
+            \pgfmathparse{
+               (-\midangle>180?"flush left":"flush right")
+            } \edef\textalign{\pgfmathresult}
+            \pgfmathsetmacro\labelshiftdir{1-2*(-\midangle<180)}
+
+            % Draw the color segments. Somehow, the \midrow units got lost, so we add 'pt' at the end. Not nice...
+            \filldraw[draw=white,fill=\colour] (-\cumnum:\outerradius) arc (-\cumnum:-(\newcumnum):\outerradius) --
+            (-\newcumnum:\innerradius) arc (-\newcumnum:-(\cumnum):\innerradius) -- cycle;
+
+            % Draw the data labels
+            \draw  [*-,thin,emphasis] node [append after command={(\midangle:\midradius pt) -- (\midangle:\outerradius + 1ex) -- (\tikzlastnode)}] at (\midangle:\outerradius + 1ex) [xshift=\labelshiftdir*0.5cm,inner sep=1ex, outer sep=0pt, text width=\width,anchor=\textanchor,align=\textalign,font=\small,text=body]{\name};
+            % Set the old cumulated angle to the new value
+            \global\let\cumnum=\newcumnum
+        }
+      \end{scope}
+%      \draw[gray] (0,0) circle (\outerradius) circle (\innerradius);
+    \end{tikzpicture}\par
+    \endgroup
+}
+
+% publication
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand*{\ADS}[1]{\textcolor{awesome-skyblue}{\href{#1}{ADS}}}
+\newcommand*{\arXiv}[1]{\textcolor{awesome-skyblue}{\href{#1}{arXiv}}}
+
+\newlength{\pubdatelength}
+\newlength{\pubjournallength}
+\newlength{\publinklength}
+
+% Spacings work erratically. Setting a highlight bar or not redefines \linewidth in a weird way which breaks the spacing and introduces line breaks. I have no idea what exactly causes this problem.
+
+% helper function to set spacings that work empirically
+\newcommand{\pubdefaultspacing}{%
+    \setlength{\pubdatelength}{0.15\linewidth}
+    \setlength{\pubjournallength}{0.65\linewidth}
+    \setlength{\publinklength}{0.20\linewidth}
+}
+
+% helper function to force the publication to use the full width in normal page styles without highlight bar or header
+\newcommand{\pubforcefullwidth}{%
+    \setlength{\pubdatelength}{0.1\textwidth}
+    \setlength{\pubjournallength}{0.8\textwidth}
+    \setlength{\publinklength}{0.1\textwidth}
+}
+
+% \pubforcefullwidth
+\pubdefaultspacing
+
+\newcommand{\publication}[5]{%
+    {\normalsize \color{emphasis}#1\par}
+    \vspace{0.1em}%
+    \begin{minipage}[t]{3mm}%
+        \makebox[3mm][c]{\footnotesize \faGroup}
+    \end{minipage}%
+    \hspace{0.5em}%
+    \begin{minipage}[t]{\dimexpr \linewidth-3mm-0.5em}%
+        {\footnotesize #2\par}
+    \end{minipage}%
+    \par%
+    \vspace{0.25em}%
+    \ifstrequal{#4}{}{%
+        \begin{minipage}[t]{\dimexpr \pubdatelength+\pubjournallength-1.0em}%
+            \footnotesize \makebox[3mm][c]{\faCalendar} \hspace{0.25em} #3
+        \end{minipage}%
+    }{%
+        \begin{minipage}[t]{\dimexpr \pubdatelength-1.0em}%
+            \footnotesize \makebox[3mm][c]{\faCalendar} \hspace{0.25em} #3
+        \end{minipage}%
+    }%
+    \hspace{1.0em}
+    \begin{minipage}[t]{\dimexpr \pubjournallength-1.0em}%
+        \ifstrequal{#4}{}{}{%
+            \begin{minipage}[t]{3mm}%
+                \makebox[3mm][c]{\footnotesize \faBook}
+            \end{minipage}%
+            \hspace{0.5em}%
+            \begin{minipage}[t]{\dimexpr \linewidth-3mm-0.25em}%
+                {\footnotesize #4\par}
+            \end{minipage}%
+        }%
+    \end{minipage}%
+    \hspace{1.0em}
+    \begin{minipage}[t]{\publinklength}%
+        \ifstrequal{#5}{}{}{%
+            \footnotesize \makebox[3mm][c]{\faChain} \hspace{0.25em} #5\par
+        }%
+    \end{minipage}%
+    \par\normalsize
+    \vspace{1.0em}
+}
+
+% achievement
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\achievement}[1]{%
+    \begin{minipage}[t]{3mm}%
+        \makebox[3mm][c]{\footnotesize \faTrophy}
+    \end{minipage}%
+    \hspace{0.5em}%
+    \begin{minipage}[t]{\dimexpr \textwidth-0.5em-3mm}%
+        {\normalsize #1\par}
+    \end{minipage}%
+    \par
+    \vspace{0.5em}
+}
+
+% lists
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage{enumitem}
+\setlist[itemize]{noitemsep, topsep=0pt, leftmargin=1em}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FINAL FORMATTING
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{headerhighlightmain}
+\RequirePackage{hyperref}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  THE END
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

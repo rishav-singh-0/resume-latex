@@ -445,9 +445,11 @@
             Technology: #4
         \end{minipage}%
     \end{minipage}%
+
     \begin{minipage}[t]{\projectpositionlength}% minipage for position
         {\large \color{emphasis} #2}
     \end{minipage}%
+
     \ifstrequal{#5}{}{}{\par \vspace{0.1em} \footnotesize #5}
     \par\normalsize
     \vspace{0.5em}
