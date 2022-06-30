@@ -416,7 +416,7 @@
 \setlength{\projectdateplacelength}{0.4\linewidth}
 \setlength{\projectpositionlength}{0.4\linewidth}
 \def \ifempty#1{\def\temp{#1} \ifx\temp\empty }
-\newcommand{\project}[4]{%
+\newcommand{\project}[5]{%
     \begin{minipage}[t]{\projectdateplacelength}% minipage for left column with date/place
         \footnotesize
         \begin{minipage}[t]{3mm}% wrap marker in minipage to allow multi-line dates
@@ -426,23 +426,29 @@
         \begin{minipage}[t]{\dimexpr \projectdateplacelength-3mm-0.5em}% wrap date in minipage to allow multi-line dates
             #1
         \end{minipage}%
-        \ifempty{#2}
-        \else
-            \par
-            \vspace{0.1em}
-            \begin{minipage}[t]{3mm}% wrap marker in minipage to allow multi-line places
-                \makebox[3mm][c]{\faMapMarker}
-            \end{minipage}%
-            \hspace{0.5em}%
-            \begin{minipage}[t]{\dimexpr \jobdateplacelength-3mm-0.5em}% wrap place in minipage to allow multi-line places
-                #2
-            \end{minipage}%
-        \fi
+        \par
+        \vspace{0.1em}
+        \begin{minipage}[t]{3mm}% wrap marker in minipage to allow multi-line places
+            \makebox[3mm][c]{\faLink}
+        \end{minipage}%
+        \hspace{0.5em}%
+        \begin{minipage}[t]{\dimexpr \jobdateplacelength-3mm-0.5em}% wrap place in minipage to allow multi-line places
+            \href{#3}{link}
+        \end{minipage}%
+        \par
+        \vspace{0.1em}
+        \begin{minipage}[t]{3mm}% wrap marker in minipage to allow multi-line places
+            \makebox[3mm][c]{\faGears}
+        \end{minipage}%
+        \hspace{0.5em}%
+        \begin{minipage}[t]{\dimexpr \jobdateplacelength-3mm-0.5em}% wrap place in minipage to allow multi-line places
+            Technology: #4
+        \end{minipage}%
     \end{minipage}%
     \begin{minipage}[t]{\projectpositionlength}% minipage for position
-        {\large \color{emphasis} #3}
+        {\large \color{emphasis} #2}
     \end{minipage}%
-    \ifstrequal{#4}{}{}{\par \vspace{0.1em} \footnotesize #4}
+    \ifstrequal{#5}{}{}{\par \vspace{0.1em} \footnotesize #5}
     \par\normalsize
     \vspace{0.5em}
 }
