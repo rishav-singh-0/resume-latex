@@ -34,3 +34,30 @@ jobs:
         with:
           name: PDF
           path: my-resume/resume.pdf
+  
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Download Artifacts
+        uses: actions/download-artifact@master
+        id: download
+        with:
+          name: PDF
+          path: artifact
+
+      - name: Set outputs
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+      - name: Github Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            ${{ steps.download.outputs.download-path }}/*
+          tag_name: ${{ steps.vars.outputs.sha_short }}
+          name: Release ${{ steps.vars.outputs.sha_short }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
