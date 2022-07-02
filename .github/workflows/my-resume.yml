@@ -30,7 +30,8 @@ jobs:
 #             ./fonts/*.otf
 
       - name: Upload PDF
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
+        id: upload
         with:
           name: PDF
           path: my-resume/resume.pdf
