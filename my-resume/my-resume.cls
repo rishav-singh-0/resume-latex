@@ -233,6 +233,14 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CUSTOM CHANGES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Change bullet style
+% \renewcommand{\labelitemi}{\small\rightarrow}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % HEADER
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -411,28 +419,35 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % set length of date/place column versus position column in fraction of linewidth before linewidth gets redefined in minipages
+\def \ifempty#1{\def\temp{#1} \ifx\temp\empty }
 \newcommand{\project}[5]{%
     \begin{minipage}[t]{\jobpositionlength}% minipage for position
         {\large  \color{emphasis} #1}
     \end{minipage}%
     \begin{minipage}[t]{\jobdateplacelength}% minipage for left column with date/place
         \footnotesize
-        \begin{minipage}[t]{3mm}% wrap marker in minipage to allow multi-line dates
-            \makebox[3mm][c]{\faCalendar}
-        \end{minipage}%
-        \hspace{0.5em}%
-        \begin{minipage}[t]{\dimexpr \jobdateplacelength-3mm-0.5em}% wrap date in minipage to allow multi-line dates
-            #2
-        \end{minipage}%
+        \ifempty{#2}
+        \else
+            \begin{minipage}[t]{3mm}% wrap marker in minipage to allow multi-line dates
+                \makebox[3mm][c]{\faCalendar}
+            \end{minipage}%
+            \hspace{0.5em}%
+            \begin{minipage}[t]{\dimexpr \jobdateplacelength-3mm-0.5em}% wrap date in minipage to allow multi-line dates
+                #2
+            \end{minipage}%
+        \fi
         \par
-        \vspace{0.1em}
-        \begin{minipage}[t]{3mm}% wrap marker in minipage to allow multi-line places
-            \makebox[3mm][c]{\faLink}
-        \end{minipage}%
-        \hspace{0.5em}%
-        \begin{minipage}[t]{\dimexpr \jobdateplacelength-3mm-0.5em}% wrap place in minipage to allow multi-line places
-            \href{#3}{link}
-        \end{minipage}%
+        \ifempty{#3}
+        \else
+            \vspace{0.1em}
+            \begin{minipage}[t]{3mm}% wrap marker in minipage to allow multi-line places
+                \makebox[3mm][c]{\faLink}
+            \end{minipage}%
+            \hspace{0.5em}%
+            \begin{minipage}[t]{\dimexpr \jobdateplacelength-3mm-0.5em}% wrap place in minipage to allow multi-line places
+                \href{#3}{link}
+            \end{minipage}%
+        \fi
     \end{minipage}%
     \ifstrequal{#4}{}{}{
         \par
@@ -620,6 +635,21 @@
     \hspace{0.5em}%
     \begin{minipage}[t]{\dimexpr \textwidth-0.5em-3mm}%
         {\normalsize #1\par}
+    \end{minipage}%
+    % \par
+    % \vspace{0.5em}
+}
+
+% dis: job discription
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\dis}[1]{%
+    \begin{minipage}[t]{3mm}%
+        \makebox[3mm][c]{\tiny \faArrowRight}
+    \end{minipage}%
+    \hspace{0.5em}%
+    \begin{minipage}[t]{\dimexpr \textwidth-0.5em-3mm}%
+        { #1\par}
     \end{minipage}%
     % \par
     % \vspace{0.5em}
