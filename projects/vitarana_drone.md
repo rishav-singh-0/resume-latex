@@ -87,3 +87,7 @@
   technical and team management skills for life.
 - Main difference between our solution and top 6 solution was that we focused
   more on stability over speed.
+
+# Limitations
+# Modifications
+
