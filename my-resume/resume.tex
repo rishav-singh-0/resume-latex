@@ -48,9 +48,8 @@
 
 \name{Rishav Singh}
 % \name{Singh Rishav}
-\tagline{VLSI Enthusiast eager to contribute to team success through hard work,\\ attention to detail and excellent leadership skills. Clear understanding \\of FPGA, Linux and OS related technologies. Good grip over Data Structures \\and Algorithm Concepts.}
-% \tagline{Embedded Enthusiast eager to contribute to team success through hard work,\\ attention to detail and excellent leadership skills. Clear understanding of \\Computer Architecture, Linux and OS related technologies. Good grip over Data-\\Structures and Algorithm Concepts. Motivated to learn and grow in the industry. }
-\photo[round]{rishav.jpg}{\dimexpr \headerheight-\marginbottom}   % make photo exactly match the header with margintop/marginright/marginbottom as margin
+\tagline{VLSI enthusiast eager to contribute to team success through hard work,\\ attention to detail and excellent leadership skills. A thorough experience \\of FPGA, Linux and OS related technologies. Comprehensive understanding \\of Data Structures and Algorithm Concepts.}
+\photo[round]{resume_profile_picture.jpg}{\dimexpr \headerheight-\marginbottom}   % make photo exactly match the header with margintop/marginright/marginbottom as margin
 
 \makeheader
 
@@ -70,10 +69,10 @@
     \section{Skills}
     
     \skillsection{Programming Languages}
-    \simpleskill{Python}
     \simpleskill{C, C++}
+    \simpleskill{Python}
     \simpleskill{Bash}
-    \simpleskill{Assembly(8086)}
+    % \simpleskill{Assembly(8086)}
     % \simpleskill{Javascript}
     % \simpleskill{LaTex}
     \simpleskill{Dart}
@@ -86,6 +85,7 @@
     \skillsection{Technologies}
     \simpleskill{Robot Operating System}
     \simpleskill{8086 Microprocessor}
+    \simpleskill{Risc V}
     \simpleskill{React}
     % \simpleskill{React Native}
     \simpleskill{Django}
@@ -97,6 +97,7 @@
     \simpleskill{Scilab}
     \simpleskill{Ltspice}
     \simpleskill{Keil µVision}
+    \simpleskill{Yosys}
     \simpleskill{Proteus, Multisim}
     \simpleskill{Docker}
     \simpleskill{Git}
@@ -120,7 +121,7 @@
     \skillsection{CAD Tools}
     \simpleskill{Quartus}
     \simpleskill{Modelsim}
-    \simpleskill{Vivado}
+    % \simpleskill{Vivado}
     
     \bigskip
     
@@ -131,23 +132,25 @@
     \job
         {B.Tech. in  Electronics \& \\Communication Engineering}
         {July 2019 - May 2023}
-        {Dharmsinh Desai University \\Nadiad}
+        {Dharmsinh Desai University, Nadiad}
         {CGPA - 8.65/10}
     \job
         {HSC (GHSEB)}
         {June 2019}
-        {Shree P. V. Modi School \\Jamnagar}
+        {Shree P. V. Modi School, Jamnagar}
         {PR - 80.9/100}
 
-    \section[\faGears]{Professional Experience}
+    \section[\faGears]{Internship Experience}
     \job
         {\href{https://youtu.be/D06OxrzWa38}{Intern at eYantra, IIT Bombay}}
         {May 2021 - Jul 2021}
         {Bombay}
         {
             \dis{Optimized auto evaluation tool for working on Linux kernels }
-            \dis{Created and connected Django backend with Vue frontend and automated dynamic docker container generation on submission and result evaluation }
+            \dis{Created unified platform and connected Django backend with Vue frontend and automated dynamic docker container generation on submission and result evaluation based on each theme requirement}
+            % \dis{Unified }
         }
+    \section[\faGears]{Extra Experience}
     \job
         {\href{https://abhiyantacommunity.org/}{Tech Lead at Abhiyanta Community}}
         {Sep 2020 - Current}
@@ -196,7 +199,7 @@
         {Linux Kernel Configuration}
         {Jun 2021 - Jul 2021}
         {https://rishav-singh-0.github.io/custom_linux_kernel.html}
-        {OS Components, Linux, Kernel}
+        {OS Components, Linux, Shell Scripting}
         {
             \dis{Configured Linux kernel for better power consumption, security and performance }
         }
@@ -206,17 +209,37 @@
 \makebody
 \clearpage
 
+% Page 2
+% \pagestyle{empty}
+\pagestyle{highlightmain}
+\highlightbar{\hfill}
+\mainbar{}
+\makebody
+\clearpage
+
+% Page 3
 % \pagestyle{empty}
 \pagestyle{highlightmain}
 \highlightbar{\hfill}
 
 \mainbar{
 
+    \project
+        {UART using Verilog}
+        {Oct 2020 - Nov 2020}
+        {https://github.com/rishav-singh-0/uart-verilog}
+        {Verilog, Quartus}
+        {
+        \dis{Implemented UART transmitter and receiver using verilog}
+        \dis{Wrote test-bench verification code to verify UART protocol working}
+        }
+        
     \section[\faTrophy]{Achievements}
      \begin{itemize}
          \item \textbf{Led} the team to pre-finals round in eYantra Robotics Competetion and were in \textbf{top 20} among \textbf{2603 teams of 572 colleges} all over the globe
-         \item Grade B in Embedded Mooc 
+         \item Grade B in e-Yantra Embedded Mooc 2021
          \item Campus Ambassador at eYantra, IIT Bombay
+         \item Winner of Code-e-Fest Competition in DDU annual festival (2021)
      \end{itemize}
     
     \section[\faMortarBoard]{Courses}
@@ -228,6 +251,24 @@
     
     \section[\faRocket]{Other Projects}
     
+     \project
+        {Px4 autopilot drone simulation using ROS}
+        {Nov 2021 - Dec 2021}
+        {https://youtu.be/Jneiiq37Wmw}
+        {Robot Operating system, Python, Bash}
+        {
+        \dis{Achieved autopilot control for traversing the drone} 
+        \dis{Connected the simulation environment with QGroundControl application using ROS}
+        }
+     \project
+        {Crypto and Stocks Analysing Bot}
+        {Oct 2021 - Nov 2021}
+        {https://github.com/rishav-singh-0/trend-buddy}
+        {Django, Redis, Docker, TALib}
+        {
+        \dis{Realtime data fetching and applying technical indicators on selected symbols }
+        \dis{Backtesting of custom strategies and displaying result on charts}
+        }
      \project
         {Abhiyanta Community Website}
         {Jul 2020 - Oct 2020}
@@ -247,15 +288,6 @@
         \dis{Automated CI/CD with github actions and hosted on github-pages}
         }
      \project
-        {Crypto and Stocks Analysing Bot}
-        {Oct 2021 - Nov 2021}
-        {https://github.com/rishav-singh-0/trend-buddy}
-        {Django, Redis, Docker, TALib}
-        {
-        \dis{Realtime data fetching and applying technical indicators on selected symbols }
-        \dis{Backtesting of custom strategies and displaying result on charts}
-        }
-     \project
         {Jellyfin Media Server using resberry-pi3}
         {July 2022 - Aug 2022}
         {}
@@ -270,7 +302,6 @@
     
 }
 \makebody
-
 \clearpage
 
 
