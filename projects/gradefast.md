@@ -1,17 +1,11 @@
-# GradeFast++
+#GradeFast++ - Internship at e-Yantra, IIT Bombay
 - 20th May 2021 - 8th July 2021
 
-Rishav Singh
-Nikhil Mankani
-Sriram Srinivasan
+## Team
+Rishav Singh, Nikhil Mankani, Sriram Srinivasan
 
-Mentors:
-Ameya Shenoy
-Andrea F.
-Kalind Karia
-Omkar Manjrekar
-Parth Parikh
-Lohit P.
+## Mentors
+Ameya Shenoy, Andrea F., Kalind Karia, Omkar Manjrekar, Parth Parikh, Lohit P.
 
 ## App Server
 - App Server is made with Django, Postgres as our database, storing resources
@@ -36,3 +30,6 @@ Lohit P.
 
 ## Frontend
 - Made with Vue Js
+
+## Journey
+- I didn't knew about most of the technologies when started.
