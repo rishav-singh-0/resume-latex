@@ -1,6 +1,18 @@
 # HR Questions
 
 1. Tell me about yourself.
+- my name, year and college, (maybe marks)
+- why i joined ec
+- technical skills - programming languages - python, c, c++, verilog, bash.
+  Also familiar with technologies such as ROS, microprocessors, some web, some
+  app technologies. I am project based learner. Tried variety of things and
+  explored and learned various technologies whenever needed. 
+- projects - vitarana drone, hydroponics iot
+- participated in eyrc and reached till prefinals round. also won an internship
+  opportunity at eYantra IIT Bombay. 
+- am a part of Abhiyanta as a tech lead, associate developer at ddu connect.
+- hobbies - write technical blogs, play with linux desktop environments
+
 2. What is your greatest strength?
 3. What is your greatest weakness?
 - Being straight forward about everything
