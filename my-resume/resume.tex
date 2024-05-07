@@ -1,33 +1,20 @@
-\documentclass[%singlesided,
-               doublesided,
-               paper=a4,
-               fontsize=10pt
-              ]{my-resume}
+\documentclass[doublesided, paper=a4, fontsize=10pt]{my-resume}
 
+%%%%%%%%%% Geometry %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% set geometry
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\setlength\highlightwidth{6cm}
+\setlength\highlightwidth{6cm}          % side bar width
 \setlength\headerheight{4cm}            % note that margintop gets added to this value, i.e. the header bar is 5cm
 \setlength\marginleft{1cm}
 \setlength\marginright{\marginleft}      % needs to be 1.5 times to be actually equal. why?
 \setlength\margintop{1cm}
 \setlength\marginbottom{1cm}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% FONTS
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% FONTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \RequirePackage{fontspec}
 \setmainfont{Carlito}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% COLORS
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% COLORS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \colorlet{highlightbarcolor}{awesome-lightgray}
 \colorlet{headerbarcolor}{awesome-darkgray}
@@ -38,18 +25,14 @@
 \colorlet{emphasis}{black}
 \colorlet{body}{black}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% set document
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%% Set Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
 \name{Rishav Singh}
-% \name{Singh Rishav}
-\tagline{VLSI enthusiast eager to contribute to team success through hard work,\\ attention to detail and excellent leadership skills. A thorough experience \\of FPGA, Linux and OS related technologies. Comprehensive understanding \\of Data Structures and Algorithm Concepts.}
-\photo[round]{resume_profile_picture.jpg}{\dimexpr \headerheight-\marginbottom}   % make photo exactly match the header with margintop/marginright/marginbottom as margin
+% \name{Singh Rishav Ravindra}
+\tagline{Experienced Embedded Linux Developer with leadership acumen. Dedicated \\to optimizing systems through BSP development, kernel programming, and \\Linux device drivers. Known for a meticulous approach and deep understanding\\ of Linux architecture. Seeking to contribute expertise to a dynamic team.}
+\photo[round]{profile_pic_ai_generated.jpg}{\dimexpr \headerheight-\marginbottom}   % make photo exactly match the header with margintop/marginright/marginbottom as margin
 
 \makeheader
 
@@ -83,30 +66,33 @@
     
     \vspace{0.5em}
     \skillsection{Technologies}
+    \simpleskill{Buildroot, Busybox}
     \simpleskill{Robot Operating System}
     \simpleskill{8086 Microprocessor}
     \simpleskill{Risc V}
-    \simpleskill{React}
+    % \simpleskill{React}
     % \simpleskill{React Native}
     \simpleskill{Django}
-    \simpleskill{Flutter}
-    \simpleskill{Firebase}
+    \simpleskill{Flutter, Firebase}
     
     \vspace{0.5em}
     \skillsection{Software \& Tools}
-    \simpleskill{Scilab}
-    \simpleskill{Ltspice}
-    \simpleskill{Keil µVision}
-    \simpleskill{Yosys}
-    \simpleskill{Proteus, Multisim}
+    \simpleskill{Git, SVN}
+    \simpleskill{Jira}
     \simpleskill{Docker}
-    \simpleskill{Git}
+    \simpleskill{Scilab}
+    \simpleskill{Ltspice, Keil µVision}
+    \simpleskill{Proteus, Multisim}
     
-    % \vspace{0.5em}
-    % \skillsection{Fields}
+    \vspace{0.5em}
+    \skillsection{Fields}
+    \simpleskill{BSP Development}
+    \simpleskill{Linux Device Drivers}
+    \simpleskill{IPCamera Development}
+    \simpleskill{NVR Development}
+    \simpleskill{Microcontrollers}
+    \simpleskill{Computer Architecture}
     % \simpleskill{Digital Electronics}
-    % \simpleskill{Microcontrollers}
-    % \simpleskill{Computer Architecture}
     % \simpleskill{Embedded Electronics}
     % \simpleskill{Web Development}
     
@@ -117,10 +103,10 @@
     % \simpleskill{RTOS}
     % \simpleskill{MacOS}
     
-    \vspace{0.5em}
-    \skillsection{CAD Tools}
-    \simpleskill{Quartus}
-    \simpleskill{Modelsim}
+    % \vspace{0.5em}
+    % \skillsection{CAD Tools}
+    % \simpleskill{Quartus}
+    % \simpleskill{Modelsim}
     % \simpleskill{Vivado}
     
     \bigskip
@@ -135,22 +121,33 @@
         {Dharmsinh Desai University, Nadiad}
         {CGPA - 8.65/10}
     \job
-        {HSC (GHSEB)}
+        {Higher Secondary Certificate (GHSEB)}
         {June 2019}
-        {Shree P. V. Modi School, Jamnagar}
-        {PR - 80.9/100}
-
-    \section[\faGears]{Internship Experience}
+        {P.V.Modi School, Jamnagar}
+        {Percentage - 71.5/100}
+        
+    \section[\faGears]{Experience}
+    \job
+        {Embedded Platform Matrix Comsec Pvt. Ltd.}
+        {Jan 2023 - Present}
+        {Vadodara, Gujarat}
+        {
+            \dis{Led Network Video Recorder and IP Camera platform team, overseeing all aspects of development}
+            \dis{Spearheaded BSP development using Buildroot, crafting kernel device drivers for diverse functionalities}
+            \dis{Proficiently handled SoCs including Rockchip and Sigmastar}
+            \dis{Orchestrated successful board bring-up for PTZ Camera integration}
+        }
+        
+    \section[\faGears]{Internship \& Other Experience}
     \job
         {\href{https://youtu.be/D06OxrzWa38}{Intern at eYantra, IIT Bombay}}
         {May 2021 - Jul 2021}
         {Bombay}
         {
-            \dis{Optimized auto evaluation tool for working on Linux kernels }
+            \dis{Optimized auto evaluation tool for working on Linux Kernels}
             \dis{Created unified platform and connected Django backend with Vue frontend and automated dynamic docker container generation on submission and result evaluation based on each theme requirement}
-            % \dis{Unified }
         }
-    \section[\faGears]{Extra Experience}
+    % \section[\faGears]{Extra Experience}
     \job
         {\href{https://abhiyantacommunity.org/}{Tech Lead at Abhiyanta Community}}
         {Sep 2020 - Current}
@@ -178,13 +175,12 @@
             \dis{Learned about team management and task division and distribution for achieving larger goals}
         }
      \project
-        {Industrial Surveillance Robot on FPGA}
-        {Jan 2022 - Mar 2022}
-        {https://rishav-singh-0.github.io/industrial-surveillance-robot/}
-        {Verilog, FPGA, Quartus}
+        {Linux Kernel Configuration}
+        {Jun 2021 - Jul 2021}
+        {https://rishav-singh-0.github.io/custom_linux_kernel.html}
+        {OS Components, Linux, Shell Scripting}
         {
-            \dis{A FPGA based robot simulation for measuring the important industrial parameters using different sensors}
-            \dis{Armed with IoT gate way to analyze the required parameters }
+            \dis{Configured Linux kernel for better power consumption, security and performance }
         }
      \project
         {IoT based Hydroponics(Govt. Granted)}
@@ -194,36 +190,28 @@
         {
             \dis{A Gujarat government granted(SSIP) project to modify hydroponics based farming system with IoT in order to improve quality of soil less farming}
             \dis{Connected the hydroponics plant to the cloud server for data storage and control through flutter android app }
-        }
-     \project
-        {Linux Kernel Configuration}
-        {Jun 2021 - Jul 2021}
-        {https://rishav-singh-0.github.io/custom_linux_kernel.html}
-        {OS Components, Linux, Shell Scripting}
-        {
-            \dis{Configured Linux kernel for better power consumption, security and performance }
-        }
-    
+        }    
 
+    \textcolor{white}{\fontsize{1}{1.2}\selectfont IIT Bombay Banglore AI ML Cameras BSP M.Tech Linux kernel internals device drivers bootloader configurations Qualcomm TI NXP Leader}
 }
 \makebody
 \clearpage
 
 % Page 2
-% \pagestyle{empty}
-\pagestyle{highlightmain}
-\highlightbar{\hfill}
-\mainbar{}
-\makebody
-\clearpage
-
-% Page 3
-% \pagestyle{empty}
+\pagestyle{empty}
 \pagestyle{highlightmain}
 \highlightbar{\hfill}
 
 \mainbar{
-
+     \project
+        {Industrial Surveillance Robot on FPGA}
+        {Jan 2022 - Mar 2022}
+        {https://rishav-singh-0.github.io/industrial-surveillance-robot/}
+        {Verilog, FPGA, Quartus}
+        {
+            \dis{A FPGA based robot simulation for measuring the important industrial parameters using different sensors}
+            \dis{Armed with IoT gate way to analyze the required parameters }
+        }
     \project
         {UART using Verilog}
         {Oct 2020 - Nov 2020}
@@ -233,7 +221,7 @@
         \dis{Implemented UART transmitter and receiver using verilog}
         \dis{Wrote test-bench verification code to verify UART protocol working}
         }
-        
+
     \section[\faTrophy]{Achievements}
      \begin{itemize}
          \item \textbf{Led} the team to pre-finals round in eYantra Robotics Competetion and were in \textbf{top 20} among \textbf{2603 teams of 572 colleges} all over the globe
@@ -242,11 +230,12 @@
          \item Winner of Code-e-Fest Competition in DDU annual festival (2021)
      \end{itemize}
     
+    
     \section[\faMortarBoard]{Courses}
      \begin{itemize}
-        \item VLSI SoC Design using Verilog HDL - Maven Silicon
         \item Embedded Systems and Robotics Mooc - eYantra IIT Bombay
         \item Practical Linux for Network Engineers - Udemy
+        \item VLSI SoC Design using Verilog HDL - Maven Silicon
      \end{itemize}
     
     \section[\faRocket]{Other Projects}
@@ -298,6 +287,7 @@
      \begin{itemize}
          \item Technical blog and documentation writing
          \item Tweaking linux desktop environments
+         \item Public Speaking
      \end{itemize}
     
 }
