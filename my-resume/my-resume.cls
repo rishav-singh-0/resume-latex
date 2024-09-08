@@ -18,33 +18,6 @@
 % CLASS OPTIONS
 
 % option to have a single sided document, i.e. the highlight bar is always left
-% or have a two sided document where the highlight bar is alternating, i.e. always on the same edge of the paper
-
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrartcl}}
-\ProcessOptions*
-
-\PassOptionsToClass{oneside}{scrartcl}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% my-resume.cls
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% A class to do stuff.
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% CLASS OPTIONS
-
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{my-resume}[2022/06/21 my-resume v0.1, my own resume/CV class.]
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% CLASS OPTIONS
-
-% option to have a single sided document, i.e. the highlight bar is always left
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrartcl}}
 \ProcessOptions*
@@ -229,14 +202,6 @@
 % convenience functions to enable/disable header or highlightbar
 % TBD
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% CUSTOM CHANGES
-
-% Change bullet style
-% \renewcommand{\labelitemi}{\small\rightarrow}
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % HEADER
 % variables for name, tag line and photo setup
@@ -264,11 +229,11 @@
             }{}
             % print the header text
                 \begin{minipage}[t][2em]{\linewidth}
-                    {\Huge\bfseries\color{headerfontcolor}\MakeUppercase{\@name}\par}
+                {\Huge\bfseries\color{headerfontcolor}\MakeUppercase{\@name}\par}
                 \end{minipage}%
                 \vfill%
-                \begin{minipage}[b][\dimexpr \headerheight-2em-\marginbottom]{\linewidth}%
-                    {\large\bfseries\color{headerfontcolor}\@tagline\par}
+                \begin{minipage}[b][\dimexpr \headerheight-2em-\marginbottom]{0.98\linewidth}%
+                    {\large\bfseries\color{headerfontcolor}\raggedright\@tagline\par}
                 \end{minipage}%
         % finish the minipages for text and photo if photo is given
         \ifdef{\@photodiameter}{%
@@ -279,7 +244,7 @@
     			\ifthenelse{\equal{\@photoformat}{square}}{%
     			    \includegraphics[width=\linewidth]{\@photo}%
     			}{%
-    			    \tikz\path[fill overzoom image={\@photo}]circle[radius=0.5\linewidth];
+    			    \tikz\path[fill overzoom image={\@photo}]circle[radius=0.52\linewidth];
     			}
     		\end{minipage}%
             }{}
