@@ -1,4 +1,4 @@
-\documentclass[doublesided, paper=a4, fontsize=10pt]{my-resume}
+\documentclass[paper=a4, fontsize=10pt]{my-resume}
 
 %%%%%%%%%% Geometry %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -31,7 +31,11 @@
 
 \name{Rishav Singh}
 % \name{Singh Rishav Ravindra}
-\tagline{Experienced Embedded Linux Developer with leadership acumen. Dedicated \\to optimizing systems through BSP development, kernel programming, and \\Linux device drivers. Known for a meticulous approach and deep understanding\\ of Linux architecture. Seeking to contribute expertise to a dynamic team.}
+\tagline{
+\sloppy
+Experienced Embedded Linux Developer with leadership acumen. Dedicated \\to optimizing systems through BSP development, kernel programming, and \\Linux device drivers. Known for a meticulous approach and deep understanding\\ of Linux architecture. Seeking to contribute expertise to a dynamic team.
+\fussy
+}
 \photo[round]{resume_profile_picture.jpg}{\dimexpr \headerheight-\marginbottom}   % make photo exactly match the header with margintop/marginright/marginbottom as margin
 
 \makeheader
@@ -39,7 +43,7 @@
 \highlightbar{
 
     \section{Contact}
-    
+
     \email{rsh04613@gmail.com}
     \phone{+91 7016993938}
     % \location{Some Street 1, 12345 City Name}
@@ -48,72 +52,72 @@
     \github{@rishav-singh-0}{https://github.com/rishav-singh-0}
     \linkedin{Rishav Singh}{https://www.linkedin.com/in/rishav-singh-0}
     \website{Rishav's Blog}{http://rishav-singh-0.github.io/}
-    
+
     \section{Skills}
-    
+
     \skillsection{Programming Languages}
-    \simpleskill{C, C++}
-    \simpleskill{Python}
-    \simpleskill{Bash}
-    % \simpleskill{Assembly(8086)}
-    % \simpleskill{Javascript}
-    % \simpleskill{LaTex}
-    \simpleskill{Dart}
-    
+    \skill{C, C++}
+    \skill{Python}
+    \skill{Bash}
+    % \skill{Assembly(8086)}
+    % \skill{Javascript}
+    % \skill{LaTex}
+    \skill{Dart}
+
     \vspace{0.5em}
     \skillsection{Hardware Languages}
-    \simpleskill{Verilog HDL}
-    
+    \skill{Verilog HDL}
+
     \vspace{0.5em}
     \skillsection{Technologies}
-    \simpleskill{Buildroot, Busybox}
-    \simpleskill{Robot Operating System}
-    \simpleskill{8086 Microprocessor}
-    \simpleskill{Risc V}
-    % \simpleskill{React}
-    % \simpleskill{React Native}
-    \simpleskill{Django}
-    \simpleskill{Flutter, Firebase}
-    
+    \skill{Buildroot, Busybox}
+    \skill{Robot Operating System}
+    \skill{8086 Microprocessor}
+    \skill{Risc V}
+    % \skill{React}
+    % \skill{React Native}
+    \skill{Django}
+    \skill{Flutter, Firebase}
+
     \vspace{0.5em}
     \skillsection{Software \& Tools}
-    \simpleskill{Git, SVN}
-    \simpleskill{Jira}
-    \simpleskill{Docker}
-    \simpleskill{Scilab}
-    \simpleskill{Ltspice, Keil µVision}
-    \simpleskill{Proteus, Multisim}
-    
+    \skill{Git, SVN}
+    \skill{Jira}
+    \skill{Docker}
+    \skill{Scilab}
+    \skill{Ltspice, Keil µVision}
+    \skill{Proteus, Multisim}
+
     \vspace{0.5em}
     \skillsection{Fields}
-    \simpleskill{BSP Development}
-    \simpleskill{Linux Device Drivers}
-    \simpleskill{IPCamera Development}
-    \simpleskill{NVR Development}
-    \simpleskill{Microcontrollers}
-    \simpleskill{Computer Architecture}
-    % \simpleskill{Digital Electronics}
-    % \simpleskill{Embedded Electronics}
-    % \simpleskill{Web Development}
-    
+    \skill{BSP Development}
+    \skill{Linux Device Drivers}
+    \skill{IPCamera Development}
+    \skill{NVR Development}
+    \skill{Microcontrollers}
+    \skill{Computer Architecture}
+    % \skill{Digital Electronics}
+    % \skill{Embedded Electronics}
+    % \skill{Web Development}
+
     \vspace{0.5em}
     \skillsection{Operating Systems}
-    \simpleskill{Ubuntu, Arch Linux}
-    \simpleskill{Windows}
-    % \simpleskill{RTOS}
-    % \simpleskill{MacOS}
-    
+    \skill{Ubuntu, Arch Linux}
+    \skill{Windows}
+    % \skill{RTOS}
+    % \skill{MacOS}
+
     % \vspace{0.5em}
     % \skillsection{CAD Tools}
-    % \simpleskill{Quartus}
-    % \simpleskill{Modelsim}
-    % \simpleskill{Vivado}
-    
+    % \skill{Quartus}
+    % \skill{Modelsim}
+    % \skill{Vivado}
+
     \bigskip
-    
+
 }
 \mainbar{
-    
+
     \section[\faMortarBoard]{Education}
     \job
         {B.Tech. in  Electronics \& \\Communication Engineering}
@@ -125,7 +129,7 @@
         {June 2019}
         {P.V.Modi School, Jamnagar}
         {Percentage - 71.5/100}
-        
+
     \section[\faGears]{Experience}
     \job
         {Embedded Platform Matrix Comsec Pvt. Ltd.}
@@ -137,7 +141,7 @@
             \dis{Proficiently handled SoCs including Rockchip and Sigmastar}
             \dis{Orchestrated successful board bring-up for PTZ Camera integration}
         }
-        
+
     \section[\faGears]{Internship \& Other Experience}
     \job
         {\href{https://youtu.be/D06OxrzWa38}{Intern at eYantra, IIT Bombay}}
@@ -163,7 +167,7 @@
         {
             \dis{Created a team of developers for DDU Connect’s official website and Android Application }
         }
-    
+
     \section[\faRocket]{Projects}
      \project
         {Vitarana Drone}
@@ -190,7 +194,7 @@
         {
             \dis{A Gujarat government granted(SSIP) project to modify hydroponics based farming system with IoT in order to improve quality of soil less farming}
             \dis{Connected the hydroponics plant to the cloud server for data storage and control through flutter android app }
-        }    
+        }
 
     \textcolor{white}{\fontsize{1}{1.2}\selectfont IIT Bombay Banglore AI ML Cameras BSP M.Tech Linux kernel internals device drivers bootloader configurations Qualcomm TI NXP Leader}
 }
@@ -213,13 +217,13 @@
             \dis{Armed with IoT gate way to analyze the required parameters }
         }
     \project
-        {UART using Verilog}
-        {Oct 2020 - Nov 2020}
-        {https://github.com/rishav-singh-0/uart-verilog}
-        {Verilog, Quartus}
+        {Holonomic Drive Robot}
+        {Jan 2023 - Mar 2023}
+        {https://github.com/rishav-singh-0/Holonomic_Art_Bot}
+        {ESP32, Atmega2560}
         {
-        \dis{Implemented UART transmitter and receiver using verilog}
-        \dis{Wrote test-bench verification code to verify UART protocol working}
+        \dis{}
+        \dis{}
         }
 
     \section[\faTrophy]{Achievements}
@@ -229,24 +233,23 @@
          \item Campus Ambassador at eYantra, IIT Bombay
          \item Winner of Code-e-Fest Competition in DDU annual festival (2021)
      \end{itemize}
-    
-    
+
     \section[\faMortarBoard]{Courses}
      \begin{itemize}
         \item Embedded Systems and Robotics Mooc - eYantra IIT Bombay
         \item Practical Linux for Network Engineers - Udemy
         \item VLSI SoC Design using Verilog HDL - Maven Silicon
      \end{itemize}
-    
+
     \section[\faRocket]{Other Projects}
-    
+
      \project
         {Px4 autopilot drone simulation using ROS}
         {Nov 2021 - Dec 2021}
         {https://youtu.be/Jneiiq37Wmw}
         {Robot Operating system, Python, Bash}
         {
-        \dis{Achieved autopilot control for traversing the drone} 
+        \dis{Achieved autopilot control for traversing the drone}
         \dis{Connected the simulation environment with QGroundControl application using ROS}
         }
      \project
@@ -264,7 +267,7 @@
         {https://abhiyantacommunity.org/}
         {React, Git, Github, Firebase, CI/CD}
         {
-        \dis{Learnt to host the website on firebase} 
+        \dis{Learnt to host the website on firebase}
         \dis{Used github for automation and continuous deployment}
         }
      \project
@@ -273,7 +276,7 @@
         {https://rishav-singh-0.github.io/}
         {Bash, Markdown, Git, Github, CI/CD}
         {
-        \dis{Achieved the goal of a minimal static site generator using bash and markdown files} 
+        \dis{Achieved the goal of a minimal static site generator using bash and markdown files}
         \dis{Automated CI/CD with github actions and hosted on github-pages}
         }
      \project
@@ -282,14 +285,14 @@
         {}
         {RespberryPi}
         {}
-    
+
     \section[\faPencil]{Extra-Curricular Activities}
      \begin{itemize}
          \item Technical blog and documentation writing
          \item Tweaking linux desktop environments
          \item Public Speaking
      \end{itemize}
-    
+
 }
 \makebody
 \clearpage
