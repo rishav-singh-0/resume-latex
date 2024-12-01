@@ -220,8 +220,8 @@
 % assemble the header
 \newcommand{\makeheader}{% header bar is a minipage
     \begin{minipage}[t][\headerheight]{\textwidth}%
-        % \vspace{-1em}
-        \vspace{\dimexpr \@namefontheight-\@namelineheight}                     % align top of name and photo
+        \vspace{-1em}
+        % \vspace{\dimexpr \@namefontheight-\@namelineheight}                     % align top of name and photo
         % create two minipages for header text and photo if photo is given
         \ifdef{\@photodiameter}{
             \begin{minipage}[t]{\dimexpr \textwidth-\@photodiameter}        % to top align name and photo add [t] here
@@ -329,23 +329,11 @@
         {\large \color{emphasis} #1}
     \end{minipage}%
     \begin{minipage}[t]{\jobdateplacelength}% minipage for left column with date/place
+        \raggedleft
         \footnotesize
-        \begin{minipage}[t]{3mm}% wrap marker in minipage to allow multi-line dates
-            \makebox[3mm][c]{\faCalendar}
-        \end{minipage}%
-        \hspace{0.5em}%
-        \begin{minipage}[t]{\dimexpr \jobdateplacelength-3mm-0.5em}% wrap date in minipage to allow multi-line dates
-            #2
-        \end{minipage}%
+        \textbf{#2} % Duration (bold for emphasis)
         \par
-        \vspace{0.1em}
-        \begin{minipage}[t]{3mm}% wrap marker in minipage to allow multi-line places
-            \makebox[3mm][c]{\faMapMarker}
-        \end{minipage}%
-        \hspace{0.5em}%
-        \begin{minipage}[t]{\dimexpr \jobdateplacelength-3mm-0.5em}% wrap place in minipage to allow multi-line places
-            #3
-        \end{minipage}%
+        #3          % Other info (e.g., location)
     \end{minipage}%
     \ifstrequal{#4}{}{}{\par \vspace{0.1em} \footnotesize #4}
     \par\normalsize
@@ -365,25 +353,15 @@
         \footnotesize
         \ifempty{#2}
         \else
-            \begin{minipage}[t]{3mm}% wrap marker in minipage to allow multi-line dates
-                \makebox[3mm][c]{\faCalendar}
-            \end{minipage}%
-            \hspace{0.5em}%
-            \begin{minipage}[t]{\dimexpr \jobdateplacelength-3mm-0.5em}% wrap date in minipage to allow multi-line dates
-                #2
-            \end{minipage}%
+            \raggedleft
+            \footnotesize
+            \textbf{#2} % Duration (bold for emphasis)
         \fi
         \par
         \ifempty{#3}
         \else
-            \vspace{0.1em}
-            \begin{minipage}[t]{3mm}% wrap marker in minipage to allow multi-line places
-                \makebox[3mm][c]{\faLink}
-            \end{minipage}%
-            \hspace{0.5em}%
-            \begin{minipage}[t]{\dimexpr \jobdateplacelength-3mm-0.5em}% wrap place in minipage to allow multi-line places
-                \href{#3}{link}
-            \end{minipage}%
+            \par
+            \href{#3}{link}
         \fi
     \end{minipage}%
     \ifstrequal{#4}{}{}{
@@ -391,7 +369,8 @@
         \vspace{0.1em}
         \footnotesize
         \begin{minipage}[t]{3mm}% wrap marker in minipage to allow multi-line places
-            \makebox[3mm][c]{\faGears}
+            % \makebox[3mm][c]{\faGears}
+            \makebox[3mm][c]{\par -}
         \end{minipage}%
         \hspace{0.5em}%
         Technology: #4
@@ -418,14 +397,12 @@
 
 \newcommand{\dis}[1]{%
     \begin{minipage}[t]{3mm}%
-        \makebox[3mm][c]{\tiny \faArrowRight}
+        \makebox[3mm][c]{\par -}
     \end{minipage}%
-    \hspace{0.5em}%
+    \hspace{0.5em}% Space between the marker and text
     \begin{minipage}[t]{\dimexpr \textwidth-0.5em-3mm}%
         { #1\par}
     \end{minipage}%
-    % \par
-    % \vspace{0.5em}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
