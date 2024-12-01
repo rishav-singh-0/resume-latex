@@ -69,9 +69,6 @@
 \RequirePackage[bindingoffset=0cm,nomarginpar,noheadfoot]{geometry}
 \geometry{left=\marginleft,right=\marginright,top=\margintop,bottom=\marginbottom}
 
-% \setlength{\voffset}{\dimexpr -1in+\margintop}
-% \setlength{\topmargin}{0cm}
-
 % minipage has an annoying af indent that must be removed
 \setlength{\parindent}{0pt}
 
@@ -118,13 +115,11 @@
 
 % declare new page style using layers
 \DeclareNewPageStyleByLayers{headerhighlightmain}{%
-  highlightbar.even,%
-  highlightbar.odd,%
+  highlightbar,
   header.bg
 }
 \DeclareNewPageStyleByLayers{highlightmain}{%
-  highlightbar.even,%
-  highlightbar.odd
+  highlightbar
 }
 \DeclareNewPageStyleByLayers{headermain}{%
   header.bg
@@ -133,44 +128,9 @@
 % define the layer for the highlight bar on odd pages
 \DeclareNewLayer[
   background,
-  oddpage,
-  innermargin,
   width=\highlightwidth,
   contents={\color{highlightbarcolor}\rule{\layerwidth}{\layerheight}}
-]{highlightbar.odd}
-
-% clone highlight bar form odd pages to even pages
-% on same side for digital format
-\newcommand*\highlightbarsingle{%
-\DeclareNewLayer[
-  background,
-  evenpage,
-  outermargin,
-  width=\highlightwidth,
-  contents={\color{highlightbarcolor}\rule{\layerwidth}{\layerheight}}
-]{highlightbar.even}
-}
-
-% clone highlight bar from odd pages to even pages
-% on opposite sides for prints
-\newcommand*\highlightbardouble{%
-\DeclareNewLayer[
-    clone=highlightbar.odd,
-    evenpage,
-    align=r,
-    hoffset=\paperwidth
-  ]{highlightbar.even}
- }
-
-% use the correct version of the highlight bar on even pages
-% single for single, double for double
-
-\DeclareNewLayer[
-    clone=highlightbar.odd,
-    evenpage,
-    align=r,
-    hoffset=\paperwidth
-  ]{highlightbar.even}
+]{highlightbar}
 
 % define the layer for the header
 \DeclareNewLayer[
