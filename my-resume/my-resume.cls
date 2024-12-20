@@ -282,20 +282,21 @@
 % set length of date/place column versus position column in fraction of linewidth before linewidth gets redefined in minipages
 \newlength{\jobdateplacelength}
 \newlength{\jobpositionlength}
-\setlength{\jobdateplacelength}{0.3\linewidth}
-\setlength{\jobpositionlength}{0.7\linewidth}
-\newcommand{\job}[4]{%
+\setlength{\jobdateplacelength}{0.25\linewidth}
+\setlength{\jobpositionlength}{0.75\linewidth}
+\newcommand{\job}[5]{%
     \begin{minipage}[t]{\jobpositionlength}% minipage for position
-        {\large \color{emphasis} #1}
+        \large #1 
+        \vspace{0.2em}
+        \par \footnotesize #4 % Subtitle or additional text
     \end{minipage}%
     \begin{minipage}[t]{\jobdateplacelength}% minipage for left column with date/place
         \raggedleft
         \footnotesize
-        \textbf{#2} % Duration (bold for emphasis)
-        \par
-        #3          % Other info (e.g., location)
+        \textbf{#2}     % Duration (bold for emphasis)
+        \par #3         % Other info (e.g., location)
     \end{minipage}%
-    \ifstrequal{#4}{}{}{\par \vspace{0.1em} \footnotesize #4}
+    \ifstrequal{#5}{}{}{\par \vspace{0.1em} \footnotesize #5}
     \par\normalsize
     \vspace{0.5em}
 }
@@ -307,34 +308,23 @@
 \def \ifempty#1{\def\temp{#1} \ifx\temp\empty }
 \newcommand{\project}[5]{%
     \begin{minipage}[t]{\jobpositionlength}% minipage for position
-        {\large  \color{emphasis} #1}
+        {\large #1}
+        \vspace{0.2em}
+        \par \footnotesize #4 %
     \end{minipage}%
     \begin{minipage}[t]{\jobdateplacelength}% minipage for left column with date/place
         \footnotesize
         \ifempty{#2}
         \else
             \raggedleft
-            \footnotesize
-            \textbf{#2} % Duration (bold for emphasis)
+            \footnotesize \textbf{#2} % Duration (bold for emphasis)
         \fi
         \par
         \ifempty{#3}
         \else
-            \par
-            \href{#3}{link}
+            \par \href{#3}{link}
         \fi
     \end{minipage}%
-    \ifstrequal{#4}{}{}{
-        \par
-        \vspace{0.1em}
-        \footnotesize
-        \begin{minipage}[t]{3mm}% wrap marker in minipage to allow multi-line places
-            % \makebox[3mm][c]{\faGears}
-            \makebox[3mm][c]{\par -}
-        \end{minipage}%
-        \hspace{0.5em}%
-        Technology: #4
-    }
     \ifstrequal{#5}{}{}{\par \vspace{0.1em} \footnotesize #5}
     \par\normalsize
     \vspace{0.5em}
