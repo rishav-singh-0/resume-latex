@@ -1,0 +1,234 @@
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\classesList}[4]{
+    \item\small{
+        {#1 #2 #3 #4 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING----------
+% \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+%   \textbf{\href{https://rishav-singh-0.github.io/}{\Large Rishav Singh}} & Email : \href{mailto:rsh04613@gmail.com}{rsh04613@gmail.com}\\
+%   \href{https://rishav-singh-0.github.io/}{https://rishav-singh-0.github.io/} & Mobile : +917016993938 \\
+% \end{tabular*}
+
+\begin{center}
+    {\Huge \scshape Rishav Singh} \\ \vspace{1pt}
+    \small \raisebox{-0.1\height}\faPhone\ +917016993938 ~ \href{mailto:rsh04613@gmail.com}{\raisebox{-0.2\height}\faEnvelope\  \underline{rsh04613@gmail.com}} ~ 
+    \href{https://www.linkedin.com/in/rishav-singh-0}{\raisebox{-0.2\height}\faLinkedin\ \underline{linkedin.com/in/rishav-singh-0}}  ~
+    \href{https://github.com/rishav-singh-0}{\raisebox{-0.2\height}\faGithub\ \underline{github.com/rishav-singh-0}}
+    \vspace{-8pt}
+\end{center}
+
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Dharmsinh Desai University}{July 2019 - May 2023}
+      {B.Tech. in  Electronics Communication Engineering;  CGPA - 8.65/10}{Nadiad, Gujarat}
+  \resumeSubHeadingListEnd
+\vspace{-5pt}
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Matrix Comsec Pvt. Ltd}{Jan 2023 - Present}
+      {Embedded Platform Engineer}{Vadodara, Gujarat}
+      \resumeItemListStart
+        \resumeItem{Developed Network Video Recorders and IP Cameras, overseeing BSP creation with Buildroot and crafting kernel drivers for diverse functionalities, collaborating with cross team software architects}
+        \resumeItem{Worked on 104 camera variants using 3 SoCs(SSC339G, SSC335DE, C5-36GW) and 12 NVR variants with 2 SoCs (RK3568, RK3588), ensuring compatibility and reliability}
+        \resumeItem{Solely maintained multiple product lines, improved build times upto 80\%, Makefiles, and release processes to enhance efficiency}
+        \resumeItem{Designed drivers for PTZ camera motors, achieving 38x optical zoom with combination of 5 motors, and gyro-based image stabilization}
+        \resumeItem{Resolved critical hardware-software issues, including NVR HDMI signal problems and OEM USB upgrade security}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {eYantra, IIT Bombay}{May 2021 - Jul 2021}
+      {Intern}{Mumbai, Maharashtra}
+      \resumeItemListStart
+        \resumeItem{Optimized auto evaluation tool for working on Linux Kernels}
+        \resumeItem{Created unified platform and connected Django backend with Vue frontend and automated dynamic docker container generation on submission and result evaluation based on each theme requirement}
+    \resumeItemListEnd
+    
+  \resumeSubHeadingListEnd
+\vspace{-10pt}
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \vspace{-5pt}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\textbf{\href{https://youtu.be/pkwcfo8rbys}{IoT based Hydroponics(Govt. Granted)}} $|$ \emph{C++, Python, Flutter, Firebase}}{Apr 2022 - Jun 2022}
+          \resumeItemListStart
+            \resumeItem{A Gujarat government granted(SSIP) project to modify hydroponics based farming system with IoT in order to improve quality of soil less farming}
+            \resumeItem{Connected the hydroponics plant to the cloud server for data storage and control through flutter android app}
+          \resumeItemListEnd
+          \vspace{-13pt}
+      \resumeProjectHeading
+          {\textbf{\href{https://github.com/rishav-singh-0/Holonomic_Art_Bot}{Holonomic Drive Robot}} $|$ \emph{ESP32, Atmega2560, ROS}}{Jan 2023 - Mar 2023}
+          \resumeItemListStart
+            \resumeItem{Built a three-wheeled holonomic robot for precision path planning and image-based drawing}
+            \resumeItem{Developed algorithms for motion control and image contour processing, enabling intricate pattern creation}
+          \resumeItemListEnd 
+          \vspace{-13pt}
+          \resumeProjectHeading
+          {\textbf{\href{https://youtube.com/playlist?list=PL7qLGQQRzAKJqw33z4Y1btjFr9WMiOrjP}{Vitarana Drone - Autonomous Drone Based Delivery System}} $|$ \emph{Python, ROS, Gazebo, Git}}{Oct 2020 - Feb 2021}
+          \resumeItemListStart
+            \resumeItem{Used Robot Operating System(ROS) for Autonomous Drone based delivery system in a simulated environment}
+            \resumeItem{Learned about team management and task division and distribution for achieving larger goals}
+          \resumeItemListEnd 
+    \resumeSubHeadingListEnd
+\vspace{-10pt}
+
+
+%
+%-----------PROGRAMMING SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: C, Python, Bash, Go} \\
+     \textbf{Technologies}{: Buildroot, Busybox, Rockchip, Innofusion SoCs} \\
+     \textbf{Tools/Frameworks}{: Linux, Git, GitHub, SVN, Jira, Docker} \\
+     \textbf{Fields}{: BSP Development, Board Bringup, Linux Device Drivers, IPCamera and NVR Development} \\
+    }}
+ \end{itemize}
+ \vspace{-10pt}
+
+
+%-----------INVOLVEMENT---------------
+\section{Leadership / Extracurricular}
+    \resumeSubHeadingListStart
+        \resumeSubheading{Abhiyanta Community}{Sep 2020 - Jun 2023}{Tech Lead}{Nadiad, Gujarat}
+            \resumeItemListStart
+                \resumeItem{Mentored at project based learning platform by adding value through training and motivating innovators}
+                \resumeItem{Instructor for explaining the concepts of Robotics, Robot Operating Systems, Linux, Git and Embedded Systems}
+            \resumeItemListEnd
+        \resumeSubheading{DDU Connect}{May 2019 - Jan 2023}{Associate Developer}{Nadiad, Gujarat}
+            \resumeItemListStart
+                \resumeItem{Created and managed a team of developers for DDU Connect’s official website and Android Application}
+            \resumeItemListEnd
+    \resumeSubHeadingListEnd
+\vspace{-10pt}
+
+\section{Achievements}
+ \begin{itemize}[leftmargin=0.15in]
+    \small{\setlength{\itemsep}{-3pt}
+        \item{\textbf{Led} the team to pre-finals round in eYantra Robotics Competetion and were in \textbf{top 20} among \textbf{2603 teams of 572 colleges} all over the globe}
+        \item{Winner of Code-e-Fest Competition in DDU annual festival (2021)}
+    }
+ \end{itemize}
+
+\end{document}
