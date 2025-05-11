@@ -6,7 +6,7 @@ on:
     branches: 
       - master
     paths:
-      - "my-resume/*"
+      - "src/v2/*"
       - ".github/workflows/my-resume.yml"
   workflow_dispatch: 
 
@@ -14,34 +14,32 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
     
       - name: Latex Build
-        uses: xu-cheng/latex-action@v2
+        uses: xu-cheng/latex-action@v3
         with:
-          working_directory: my-resume
-          root_file: resume.tex
-          extra_system_packages: "inkscape"
-          latexmk_use_xelatex: true
-#           extra_fonts: |
-#             ./path/to/custom.ttf
-#             ./fonts/*.otf
+          working_directory: src/v2
+          root_file: main.tex
+
+      - name: Rename Artifact
+        run: mv src/v2/main.pdf Rishav_Resume.pdf
 
       - name: Upload PDF
         uses: actions/upload-artifact@v3
         id: upload
         with:
           name: PDF
-          path: my-resume/resume.pdf
+          path: Rishav_Resume.pdf
   
   release:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       - name: Download Artifacts
-        uses: actions/download-artifact@master
+        uses: actions/download-artifact@v3
         id: download
         with:
           name: PDF
@@ -53,7 +51,7 @@ jobs:
           
       - name: Github Release
         id: create_release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: |
             ${{ steps.download.outputs.download-path }}/*
